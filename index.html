@@ -1,1 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Психологическая безопасность | Игры и упражнения для старшеклассников</title>
+    <!-- Шрифты и базовые стили -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f0f7ff 0%, #e9f0fa 100%);
+            color: #1e2a3e;
+            padding: 2rem 1.5rem;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Хедер */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f4e6e, #2b7a62);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .hero .badge {
+            background: #d9e8f5;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a5d6d;
+            margin-top: 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .sub {
+            color: #2c5a6e;
+            max-width: 700px;
+            margin: 0.8rem auto 0;
+            font-size: 1.05rem;
+        }
+
+        /* Сетка карточек */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 40px -16px rgba(0, 32, 32, 0.2);
+        }
+
+        .card-header {
+            padding: 1.3rem 1.5rem 0.6rem 1.5rem;
+            border-bottom: 2px solid #e2edf2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-header i {
+            font-size: 2rem;
+            color: #2e8b6c;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1d4c5c;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: #4a6272;
+            margin-bottom: 1.2rem;
+            border-left: 3px solid #86b3b0;
+            padding-left: 12px;
+            background: #f9fefd;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* универсальные элементы */
+        button, .btn-like {
+            background: #f0f4f9;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            margin: 0.25rem;
+        }
+
+        button.primary {
+            background: #2e8b6c;
+            color: white;
+            box-shadow: 0 4px 8px rgba(46,139,108,0.2);
+        }
+
+        button.primary:hover {
+            background: #226b53;
+            transform: scale(0.97);
+        }
+
+        button:hover {
+            background: #e3eaf0;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            border: 1px solid #cde0e6;
+            margin: 8px 0;
+            padding: 10px 14px;
+            border-radius: 24px;
+            transition: 0.1s;
+        }
+
+        .quiz-option:hover {
+            background: #eef5fa;
+            border-color: #7fae9f;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            background: #f8f0e7;
+            border-left: 5px solid #ffb347;
+        }
+
+        .scenario-text {
+            background: #eef3f0;
+            padding: 14px;
+            border-radius: 28px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .breathing-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #7fc9b2, #429c7a);
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: transform 2.2s ease-in-out;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .breathing-text {
+            text-align: center;
+            font-weight: 600;
+            margin: 5px 0 10px;
+        }
+
+        .support-list {
+            list-style: none;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .support-list li {
+            background: #f9f9ff;
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #cbdbe2;
+        }
+
+        .support-badge {
+            background: #c3e0d4;
+            border-radius: 30px;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .delete-support {
+            background: none;
+            color: #b6685c;
+            font-size: 1rem;
+            padding: 0 5px;
+            box-shadow: none;
+        }
+
+        .add-support {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .add-support input, .add-support select {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 34px;
+            border: 1px solid #cbdbe0;
+            font-family: inherit;
+            background: white;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px solid #d8e2e8;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #567382;
+            background: rgba(255,255,240,0.7);
+            padding: 1rem;
+            border-radius: 48px;
+        }
+
+        @media (max-width: 760px) {
+            body { padding: 1rem; }
+            .card-header h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-shield-heart"></i> Психологическая безопасность</h1>
+        <div class="badge">⭐ Игры и упражнения для старшеклассников ⭐</div>
+        <div class="sub">Развиваем устойчивость к давлению, учимся защищать личные границы, находим опору и управляем эмоциями</div>
+    </div>
+
+    <div class="games-grid">
+        <!-- КАРТОЧКА 1: Манипуляция.нет (распознавание давления) -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-user-secret"></i>
+                <h2>Манипуляция.нет</h2>
+            </div>
+            <div class="card-body">
+                <div class="game-description">
+                    <i class="fas fa-brain"></i> Тренируемся замечать скрытое давление, лесть и запугивание в интернете и общении.
+                </div>
+                <div id="manipulationArea">
+                    <div class="scenario-text" id="manipScenarioText">Загрузка...</div>
+                    <div id="manipOptionsContainer"></div>
+                    <div id="manipFeedback" class="feedback" style="display: none;"></div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+                        <span id="manipCounter" style="font-size:0.8rem;">Сценарий 1/3</span>
+                        <button id="nextManipBtn" class="primary">➡ Следующий</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 2: Личные границы – Как сказать "нет" -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-fence"></i>
+                <h2>Личные границы</h2>
+            </div>
+            <div class="card-body">
+                <div class="game-description">
+                    <i class="fas fa-comment-dots"></i> Учимся экологично отстаивать свои границы в реальных ситуациях.
+                </div>
+                <div id="boundaryArea">
+                    <div class="scenario-text" id="boundaryScenarioText"></div>
+                    <div id="boundaryOptions"></div>
+                    <div id="boundaryFeedback" class="feedback" style="display: none;"></div>
+                    <div style="margin-top: 12px;">
+                        <button id="nextBoundaryBtn" class="primary">🔄 Другая ситуация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 3: Дыхание безопасности (антистресс) -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-lungs"></i>
+                <h2>Дыхание центра</h2>
+            </div>
+            <div class="card-body">
+                <div class="game-description">
+                    <i class="fas fa-leaf"></i> Упражнение для саморегуляции. Вдох — спокойствие, выдох — напряжение уходит.
+                </div>
+                <div style="text-align: center;">
+                    <div id="breathingCircle" class="breathing-circle">
+                        <span id="breathPhase">Вдох</span>
+                    </div>
+                    <div class="breathing-text" id="breathInstruction">Нажмите «Старт» и дышите в такт</div>
+                    <div>
+                        <button id="startBreathBtn" class="primary"><i class="fas fa-play"></i> Старт</button>
+                        <button id="stopBreathBtn"><i class="fas fa-stop"></i> Стоп</button>
+                    </div>
+                    <p style="font-size:12px; margin-top:8px;">🌬️ 4 секунды — вдох (круг растёт), 4 сек — выдох (круг сужается)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- КАРТОЧКА 4: Моя сеть поддержки (ресурсная карта) -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h2>Круг доверия</h2>
+            </div>
+            <div class="card-body">
+                <div class="game-description">
+                    <i class="fas fa-users"></i> Визуализируй людей, которые создают безопасную среду. Добавь тех, кто поддерживает.
+                </div>
+                <div>
+                    <ul id="supportList" class="support-list">
+                        <li style="color:#6c7e8b;"><i class="fas fa-info-circle"></i> Добавьте важных людей...</li>
+                    </ul>
+                    <div class="add-support">
+                        <input type="text" id="supportName" placeholder="Имя / кто это" autocomplete="off">
+                        <select id="supportRole">
+                            <option value="Родитель/опекун">👪 Родитель/опекун</option>
+                            <option value="Друг">🤝 Друг</option>
+                            <option value="Психолог/учитель">📚 Психолог/учитель</option>
+                            <option value="Наставник">⭐ Наставник</option>
+                            <option value="Родственник">🏡 Родственник</option>
+                        </select>
+                        <button id="addSupportBtn" class="primary"><i class="fas fa-plus"></i> Добавить</button>
+                    </div>
+                    <p style="font-size: 0.7rem; margin-top: 12px;">✨ Осознание поддержки повышает психологическую безопасность</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-chalkboard-user"></i> Эти игры и упражнения направлены на развитие эмоционального интеллекта, навыков противостояния давлению, укрепления личных границ и поиска ресурсов. Рекомендуется для групповой или индивидуальной работы.
+    </div>
+</div>
+
+<script>
+    // -------------------- 1) МАНИПУЛЯЦИИ (распознавание группового давления и уловок) ----------------
+    const manipulationScenarios = [
+        {
+            text: "Твой одноклассник пишет: «Ты же умный, только крутой парень смог бы пройти этот фейковый опрос и скинуть мне пароль от аккаунта. Неужели ты слабак?»",
+            options: ["Лесть и давление на чувство вины / стыд", "Конструктивная просьба", "Честный диалог"],
+            correct: 0,
+            explanation: "✓ Это манипуляция: комплимент с переходом на обесценивание («слаба́к»). Цель — вызвать чувство неполноценности и заставить действовать против своих интересов."
+        },
+        {
+            text: "В групповом чате: «Все уже отправили свои личные фото для челленджа, только ты один ломаешь атмосферу. Если не отправишь, то ты против нас, и никто с тобой не будет общаться».",
+            options: ["Здоровая инициатива", "Манипуляция изоляцией и давлением группы", "Свободный выбор"],
+            correct: 1,
+            explanation: "✓ Давление через «все так делают» и угрозу исключения из группы — классическая форма группового давления в интернете."
+        },
+        {
+            text: "Незнакомец в соцсетях: «Пришли своё селфи для конкурса красоты. Ты очень симпатичная/симпатичный, если этого не сделаешь – пожалеешь, я смогу распространить слухи».",
+            options: ["Лесть и шантаж (угроза репутации)", "Безобидная просьба", "Позитивная мотивация"],
+            correct: 0,
+            explanation: "✓ Лесть + угроза (шантаж) – агрессивная манипуляция, нацеленная на страх. Лучший ответ — блокировка и обращение к взрослым."
+        }
+    ];
+
+    let currentManipIndex = 0;
+    const manipScenarioText = document.getElementById("manipScenarioText");
+    const manipOptionsContainer = document.getElementById("manipOptionsContainer");
+    const manipFeedbackDiv = document.getElementById("manipFeedback");
+    const manipCounterSpan = document.getElementById("manipCounter");
+    const nextManipBtn = document.getElementById("nextManipBtn");
+
+    function renderManipulation() {
+        const scenario = manipulationScenarios[currentManipIndex];
+        manipScenarioText.innerText = scenario.text;
+        manipOptionsContainer.innerHTML = "";
+        manipFeedbackDiv.style.display = "none";
+        manipFeedbackDiv.innerHTML = "";
+        scenario.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "quiz-option";
+            btn.innerHTML = `<i class="far fa-circle"></i> ${opt}`;
+            btn.addEventListener("click", () => checkManipulationAnswer(idx));
+            manipOptionsContainer.appendChild(btn);
+        });
+        manipCounterSpan.innerText = `Сценарий ${currentManipIndex+1}/${manipulationScenarios.length}`;
+    }
+
+    function checkManipulationAnswer(selectedIdx) {
+        const scenario = manipulationScenarios[currentManipIndex];
+        const isCorrect = (selectedIdx === scenario.correct);
+        let feedbackHtml = "";
+        if(isCorrect) {
+            feedbackHtml = `<i class="fas fa-check-circle" style="color:#2e8b6c;"></i> <strong>Верно!</strong> ${scenario.explanation}`;
+        } else {
+            const correctAnswerText = scenario.options[scenario.correct];
+            feedbackHtml = `<i class="fas fa-times-circle" style="color:#c95a4a;"></i> <strong>Не совсем.</strong> Правильный вариант: "${correctAnswerText}".<br> ${scenario.explanation}`;
+        }
+        manipFeedbackDiv.innerHTML = feedbackHtml;
+        manipFeedbackDiv.style.display = "block";
+        // заблокировать лишние клики? не блокируем, но пользователь может перейти дальше.
+    }
+
+    function nextManipulation() {
+        currentManipIndex = (currentManipIndex + 1) % manipulationScenarios.length;
+        renderManipulation();
+    }
+
+    nextManipBtn.addEventListener("click", nextManipulation);
+    renderManipulation();
+
+    // -------------------- 2) ГРАНИЦЫ: уверенное поведение --------------------
+    const boundaryScenarios = [
+        {
+            text: "Друг настаивает: «Да ладно, всего один раз! Скинь мне ответы на контрольную. Ты же не хочешь, чтобы я получил двойку? Ты же мой лучший друг!»",
+            options: [
+                "Агрессивно: «Отстань, сам решай, надоел!»",
+                "Пассивно: «Ладно… держи, только никому не говори».",
+                "Уверенно (ассертивно): «Я не буду давать списывать, это нарушение. Могу помочь объяснить тему, если хочешь»."
+            ],
+            correct: 2,
+            tip: "Ассертивный ответ сохраняет дружбу и уважает ваши личные границы, не поддаваясь давлению и не нарушая правил."
+        },
+        {
+            text: "В чате одноклассники подшучивают над твоим хобби и требуют: «Брось эту ерунду, будь как все! Ты странный, если продолжать». Что выберешь?",
+            options: [
+                "Согласиться и бросить хобби, чтобы не выделяться",
+                "Взорваться и нахамить в ответ",
+                "Спокойно сказать: «Мне нравится это занятие, и я не обязан подстраиваться под чужое мнение. Давайте уважать интересы друг друга»."
+            ],
+            correct: 2,
+            tip: "Защита своих увлечений — важная часть психологической безопасности. Уверенный ответ снижает давление группы."
+        },
+        {
+            text: "Родственник просит твой пароль от телефона «просто посмотреть кое-что», намекая, что иначе ты его расстроишь. Как поступить?",
+            options: [
+                "Отдать пароль, чтобы избежать конфликта",
+                "Грубо захлопнуть дверь",
+                "Четко сказать: «Я ценю наши отношения, но мои личные данные — это частная информация. Я не готов делиться паролем»."
+            ],
+            correct: 2,
+            tip: "Установление границ в семье важно для чувства контроля и безопасности. Говорить о своих границах — норма."
+        }
+    ];
+
+    let currentBoundaryIdx = 0;
+    const boundaryScenarioText = document.getElementById("boundaryScenarioText");
+    const boundaryOptionsDiv = document.getElementById("boundaryOptions");
+    const boundaryFeedbackDiv = document.getElementById("boundaryFeedback");
+    const nextBoundaryBtn = document.getElementById("nextBoundaryBtn");
+
+    function renderBoundary() {
+        const bc = boundaryScenarios[currentBoundaryIdx];
+        boundaryScenarioText.innerText = bc.text;
+        boundaryOptionsDiv.innerHTML = "";
+        boundaryFeedbackDiv.style.display = "none";
+        bc.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "quiz-option";
+            btn.innerHTML = `<i class="fas fa-comment"></i> ${opt}`;
+            btn.addEventListener("click", () => checkBoundaryAnswer(idx));
+            boundaryOptionsDiv.appendChil
