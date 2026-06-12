@@ -2,529 +2,592 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Психологическая безопасность | Игры и упражнения для старшеклассников</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense Hardcore • 100 волн</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #1a1a2e;
+            --panel: #16213e;
+            --gold: #f0c040;
+            --text: #e0e0e0;
+            --border: #34495e;
         }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f0f9ff 0%, #e6f0f5 100%);
-            color: #1e2f3a;
-            padding: 2rem 1.5rem;
-            line-height: 1.4;
-        }
-
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-        }
-
-        /* Хедер с определением */
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #155f6b, #2a9d8f);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .def-box {
-            background: #ffffffcc;
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 1rem 1.8rem;
-            display: inline-block;
-            margin-top: 1rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(42,157,143,0.3);
-        }
-        .def-box p {
-            font-weight: 500;
-            color: #1e5f6b;
-        }
-        .sub {
-            color: #2c6e5c;
-            max-width: 700px;
-            margin: 0.8rem auto 0;
-            font-size: 1rem;
-        }
-
-        /* Сетка карточек */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0 1.5rem;
-        }
-
-        .card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 2rem;
-            box-shadow: 0 20px 35px -10px rgba(0, 32, 32, 0.15);
-            overflow: hidden;
-            transition: transform 0.25s ease, box-shadow 0.3s;
-            border: 1px solid rgba(100, 150, 140, 0.2);
-            backdrop-filter: blur(1px);
+            background: #0d0d1a;
             display: flex;
-            flex-direction: column;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 28px 40px -14px rgba(28, 80, 70, 0.25);
-        }
-
-        .card-header {
-            padding: 1.3rem 1.5rem 0.6rem;
-            border-bottom: 2px solid #cbe5e0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .card-header i {
-            font-size: 2rem;
-            color: #2e8b6c;
-        }
-        .card-header h2 {
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: #1c5a57;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .game-description {
-            font-size: 0.85rem;
-            background: #eef5f2;
-            padding: 0.6rem 1rem;
-            border-radius: 1.5rem;
-            margin-bottom: 1.2rem;
-            color: #2a6b5e;
-            border-left: 4px solid #2a9d8f;
-        }
-
-        button, .quiz-option {
-            background: #f0f4f9;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
-            font-weight: 500;
-            font-size: 0.85rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: 0.2s;
-            margin: 0.25rem;
-        }
-        button.primary {
-            background: #2e8b6c;
-            color: white;
-            box-shadow: 0 4px 8px rgba(46,139,108,0.25);
-        }
-        button.primary:hover {
-            background: #226b53;
-            transform: scale(0.97);
-        }
-        .quiz-option {
-            width: 100%;
-            text-align: left;
-            background: white;
-            border: 1px solid #cde0e6;
-            margin: 8px 0;
-            padding: 10px 14px;
-            border-radius: 30px;
-        }
-        .quiz-option:hover {
-            background: #e2f0ec;
-            border-color: #7fae9f;
-        }
-        .feedback {
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            background: #fcf7e3;
-            border-left: 5px solid #f4b942;
-        }
-        .scenario-text {
-            background: #eef3f0;
-            padding: 14px;
-            border-radius: 28px;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-
-        .breathing-circle {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #7fc9b2, #2e8b6c);
-            margin: 15px auto;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            transition: transform 2.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .support-list {
-            list-style: none;
-            margin: 10px 0;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .support-list li {
-            background: #fafcff;
-            margin: 6px 0;
-            padding: 8px 12px;
-            border-radius: 40px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            border: 1px solid #cbdbe6;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            user-select: none;
+            padding: 10px;
         }
-        .support-badge {
-            background: #c3e0d4;
-            border-radius: 30px;
-            padding: 3px 10px;
-            font-size: 0.7rem;
-        }
-        .add-support {
+        .game-container {
+            background: var(--bg);
+            border-radius: 16px;
+            box-shadow: 0 0 40px rgba(100,100,255,0.3);
+            padding: 12px;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 8px;
+            max-width: 100%;
         }
-        .add-support input, .add-support select {
-            flex: 1;
-            padding: 8px 12px;
-            border-radius: 34px;
-            border: 1px solid #c0d2dc;
-            font-family: inherit;
-        }
-
-        hr { margin: 15px 0; border: none; border-top: 1px solid #d4e2e8; }
-        .footer-note {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            background: #eef3f0cc;
-            padding: 1rem;
-            border-radius: 48px;
-        }
-        @media (max-width: 760px) {
-            body { padding: 1rem; }
-            .card-header h2 { font-size: 1.2rem; }
-        }
+        .header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: center; }
+        .title { font-size: 1.4em; font-weight: bold; color: #f0c040; text-shadow: 0 0 10px rgba(240,192,64,0.4); }
+        .stats { display: flex; gap: 10px; flex-wrap: wrap; }
+        .stat { background: var(--panel); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9em; color: var(--text); border: 1px solid var(--border); display: flex; align-items: center; gap: 4px; }
+        .stat.gold { color: #f0c040; } .stat.hp { color: #e74c3c; } .stat.wave { color: #5dade2; }
+        canvas { border-radius: 8px; cursor: crosshair; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: block; max-width: 100%; height: auto; }
+        .ui { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; width: 100%; background: var(--panel); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--border); }
+        .section { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .label { color: #aaa; font-size: 0.7em; font-weight: bold; text-transform: uppercase; margin-right: 2px; }
+        .btn { padding: 7px 12px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; font-weight: bold; font-size: 0.8em; transition: 0.15s; color: #fff; min-width: 40px; text-align: center; position: relative; overflow: hidden; background: #333; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.5); filter: brightness(1.2); }
+        .btn:active { transform: scale(0.94); }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(30%); transform: none; }
+        .btn-barracks { background: #5a6c6d; border-color: #7f8c8d; }
+        .btn-archer { background: #1e7a3f; border-color: #27ae60; }
+        .btn-mage { background: #5b2d6e; border-color: #8e44ad; }
+        .btn-hero1 { background: #1a5276; border-color: #3498db; }
+        .btn-hero2 { background: #6b1a1a; border-color: #c0392b; }
+        .btn-ult { background: #7d5e0a; border-color: #f39c12; }
+        .btn-alliance { background: #a0401a; border-color: #e67e22; }
+        .btn-next { background: #1a4d2e; border-color: #2ecc71; }
+        .btn-upgrade { background: #2c3e50; border-color: #5d6d7e; }
+        .btn.selected { outline: 3px solid #fff; outline-offset: 2px; filter: brightness(1.5); }
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #222; color: #f0c040; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 0.9em; z-index: 100; pointer-events: none; opacity: 0; transition: opacity 0.3s; border: 1px solid #f0c040; }
+        .toast.show { opacity: 1; }
+        .story-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 200; cursor: pointer; }
+        .story-content { background: #1a1a2e; border: 2px solid #f0c040; border-radius: 16px; padding: 24px; max-width: 500px; text-align: center; color: #e0e0e0; box-shadow: 0 0 30px rgba(240,192,64,0.3); }
+        .story-content h2 { color: #f0c040; margin-bottom: 10px; }
+        .story-content p { line-height: 1.6; margin: 6px 0; }
+        .story-content .hint { color: #aaa; font-size: 0.85em; margin-top: 12px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%,100%{ opacity:0.4; } 50%{ opacity:1; } }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="hero">
-        <h1><i class="fas fa-shield-hart"></i> Психологическая безопасность</h1>
-        <div class="def-box">
-            <p><i class="fas fa-users"></i> <strong>Групповое давление</strong> — влияние большинства или референтной группы, вынуждающее человека менять поведение/мнение вопреки собственным желаниям. <br> 
-            <strong>Последствия давления в интернете:</strong> тревожность, снижение самооценки, кибербуллинг, рискованное поведение, изоляция.</p>
-        </div>
-        <div class="sub">⭐ 5 интерактивных игр и упражнений для развития устойчивости, границ и эмоциональной безопасности ⭐</div>
-    </div>
-
-    <div class="games-grid">
-        <!-- 1. Манипуляция.нет -->
-        <div class="card">
-            <div class="card-header"><i class="fas fa-user-secret"></i><h2>Манипуляция.нет</h2></div>
-            <div class="card-body">
-                <div class="game-description">🕵️‍♂️ Учимся распознавать скрытое давление, лесть и шантаж в сети.</div>
-                <div id="manipulationArea">
-                    <div class="scenario-text" id="manipScenarioText"></div>
-                    <div id="manipOptionsContainer"></div>
-                    <div id="manipFeedback" class="feedback" style="display:none;"></div>
-                    <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                        <span id="manipCounter">1/3</span>
-                        <button id="nextManipBtn" class="primary">➡ Следующий</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. Личные границы -->
-        <div class="card">
-            <div class="card-header"><i class="fas fa-fence"></i><h2>Личные границы</h2></div>
-            <div class="card-body">
-                <div class="game-description">🗣️ Уверенные ответы в ситуациях давления.</div>
-                <div id="boundaryArea">
-                    <div class="scenario-text" id="boundaryScenarioText"></div>
-                    <div id="boundaryOptions"></div>
-                    <div id="boundaryFeedback" class="feedback" style="display:none;"></div>
-                    <button id="nextBoundaryBtn" class="primary" style="margin-top:12px;">⟳ Другая ситуация</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Дыхание центра (антистресс) -->
-        <div class="card">
-            <div class="card-header"><i class="fas fa-lungs"></i><h2>Дыхание центра</h2></div>
-            <div class="card-body">
-                <div class="game-description">🌬️ Визуальная дыхательная практика для саморегуляции.</div>
-                <div style="text-align:center;">
-                    <div id="breathingCircle" class="breathing-circle"><span id="breathPhase">Вдох</span></div>
-                    <div id="breathInstruction" class="breathing-text">Нажмите «Старт»</div>
-                    <div><button id="startBreathBtn" class="primary"><i class="fas fa-play"></i> Старт</button>
-                    <button id="stopBreathBtn"><i class="fas fa-stop"></i> Стоп</button></div>
-                    <p style="font-size:11px; margin-top:8px;">🌀 Вдох (4с) — круг растёт, выдох (4с) — сжимается</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. Круг доверия (сеть поддержки) -->
-        <div class="card">
-            <div class="card-header"><i class="fas fa-hand-holding-heart"></i><h2>Круг доверия</h2></div>
-            <div class="card-body">
-                <div class="game-description">🤝 Визуализируй людей, которые создают безопасную среду.</div>
-                <ul id="supportList" class="support-list"><li style="color:#6f8f9a;"><i class="fas fa-info-circle"></i> Добавьте тех, кто поддерживает</li></ul>
-                <div class="add-support">
-                    <input type="text" id="supportName" placeholder="Имя / роль" autocomplete="off">
-                    <select id="supportRole"><option>Родитель</option><option>Друг</option><option>Психолог</option><option>Учитель</option><option>Наставник</option></select>
-                    <button id="addSupportBtn" class="primary"><i class="fas fa-plus"></i> Добавить</button>
-                </div>
-                <p style="font-size:0.7rem; margin-top:12px;">✨ Осознание опоры повышает психологическую устойчивость</p>
-            </div>
-        </div>
-
-        <!-- 5. НОВАЯ ИГРА: КиберЩит (Противостояние групповому давлению) -->
-        <div class="card">
-            <div class="card-header"><i class="fas fa-shield-virus"></i><h2>КиберЩит</h2></div>
-            <div class="card-body">
-                <div class="game-description">⚔️ Тренируем навыки отказа и защиты от кибербуллинга и давления толпы.</div>
-                <div id="cyberGameArea">
-                    <div class="scenario-text" id="cyberScenarioText"></div>
-                    <div id="cyberOptionsContainer"></div>
-                    <div id="cyberFeedback" class="feedback" style="display:none;"></div>
-                    <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                        <span id="cyberCounter">1/4</span>
-                        <button id="nextCyberBtn" class="primary">➡ Следующий вызов</button>
-                    </div>
-                </div>
-            </div>
+<div class="game-container">
+    <div class="header">
+        <span class="title">⚔️ Tower Defense Hardcore ⚔️</span>
+        <div class="stats">
+            <div class="stat gold"><span>🪙</span> <span id="goldDisplay">350</span></div>
+            <div class="stat hp"><span>🏰</span> <span id="hpDisplay">30</span> HP</div>
+            <div class="stat wave"><span>🌊</span> <span id="waveDisplay">0/100</span></div>
         </div>
     </div>
-    <div class="footer-note">
-        <i class="fas fa-chalkboard-user"></i> Все упражнения направлены на развитие психологической безопасности, устойчивости к манипуляциям и формирование ассертивного поведения.
+    <canvas id="gameCanvas" width="720" height="480"></canvas>
+    <div class="ui">
+        <div class="section">
+            <span class="label">🏗️ Башни</span>
+            <button class="btn btn-barracks" id="btnBarracks">⚔️ Боевая [50]</button>
+            <button class="btn btn-archer" id="btnArcher">🏹 Лучная [60]</button>
+            <button class="btn btn-mage" id="btnMage">🔮 Магии [75]</button>
+            <button class="btn btn-upgrade" id="btnUpgrade">⬆ Улучшить</button>
+        </div>
+        <div class="section">
+            <span class="label">🦸 Герои</span>
+            <button class="btn btn-hero1" id="btnHero1">🛡️ Альдрик</button>
+            <button class="btn btn-ult" id="btnUlt1">💥 Щитовой шок</button>
+            <button class="btn btn-hero2" id="btnHero2">🧙 Моргана</button>
+            <button class="btn btn-ult" id="btnUlt2">🌑 Шторм теней</button>
+            <button class="btn btn-alliance" id="btnAlliance">🤝 Альянс</button>
+        </div>
+        <div class="section">
+            <button class="btn btn-next" id="btnNextWave">▶ Следующая волна</button>
+        </div>
+    </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="story-modal" id="storyModal">
+    <div class="story-content">
+        <h2>⚔️ Tower Defense Hardcore ⚔️</h2>
+        <p>Древнее зло пробудилось в лесу Элдрин. Ни Королевство, ни Тёмная армия не могут выстоять в одиночку.</p>
+        <p><strong>Сэр Альдрик</strong> — рыцарь Королевства, и <strong>Моргана</strong> — тёмный маг, заключают вынужденный союз. Вместе им предстоит отразить 100 волн врагов!</p>
+        <p>Каждая 10-я волна приносит элитного босса, а на 100-й вас ждёт <strong>СУПЕРМЕГАБОСС</strong>.</p>
+        <p>Новые враги обладают сопротивлением к магии, стрелам или ближнему бою. Выбирайте башни с умом!</p>
+        <p class="hint">[ Кликните, чтобы начать ]</p>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // -------------------- 1) МАНИПУЛЯЦИИ (обновлённый рабочий блок) --------------------
-        const manipScenarios = [
-            { text: "Одноклассник пишет: «Ты же крутой, неужели тебе слабо скачать этот файл? Испугался? Все уже скачали, а ты трус»", options: ["Лесть + обесценивание", "Дружеская поддержка", "Нейтральный вопрос"], correct: 0, explanation: "Манипуляция через стыд и сравнение с 'всеми'. Цель — заставить делать то, что не хочется." },
-            { text: "В чате: «Отправь своё фото для розыгрыша, иначе мы подумаем, что ты предатель. Ты с нами или против?»", options: ["Здоровое общение", "Групповое давление и угроза изоляции", "Шутка"], correct: 1, explanation: "Классическое групповое давление: угроза исключения + поляризация 'с нами или против'." },
-            { text: "Незнакомец пишет: «Ты очень талантлив(а), пришли пароль от аккаунта — я помогу раскрутить страницу. Если нет — значит ты не ценишь мою помощь и пожалеешь»", options: ["Честное предложение", "Манипуляция лестью + шантаж", "Нейтральный совет"], correct: 1, explanation: "Лесть с последующей угрозой — типичный шантаж в интернете. Лучше заблокировать." }
-        ];
-        let currentManip = 0;
-        const manipScenario = document.getElementById('manipScenarioText');
-        const manipOpts = document.getElementById('manipOptionsContainer');
-        const manipFeedback = document.getElementById('manipFeedback');
-        const manipCounterSpan = document.getElementById('manipCounter');
-        const nextManip = document.getElementById('nextManipBtn');
-        function renderManip() {
-            const s = manipScenarios[currentManip];
-            manipScenario.innerText = s.text;
-            manipOpts.innerHTML = '';
-            manipFeedback.style.display = 'none';
-            s.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerHTML = `<i class="far fa-dot-circle"></i> ${opt}`;
-                btn.addEventListener('click', () => checkManip(idx));
-                manipOpts.appendChild(btn);
-            });
-            manipCounterSpan.innerText = `${currentManip+1}/${manipScenarios.length}`;
-        }
-        function checkManip(selected) {
-            const s = manipScenarios[currentManip];
-            const isCor = selected === s.correct;
-            manipFeedback.style.display = 'block';
-            if(isCor) manipFeedback.innerHTML = `<i class="fas fa-check-circle" style="color:#2e8b6c;"></i> Верно! ${s.explanation}`;
-            else manipFeedback.innerHTML = `<i class="fas fa-times-circle" style="color:#c95a4a;"></i> Неверно. Правильный вариант: "${s.options[s.correct]}".<br>${s.explanation}`;
-        }
-        nextManip.addEventListener('click', () => { currentManip = (currentManip+1)%manipScenarios.length; renderManip(); });
-        renderManip();
+(function() {
+    // ---------- DOM ----------
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const goldDisplay = document.getElementById('goldDisplay');
+    const hpDisplay = document.getElementById('hpDisplay');
+    const waveDisplay = document.getElementById('waveDisplay');
+    const toast = document.getElementById('toast');
+    const storyModal = document.getElementById('storyModal');
+    const btnBarracks = document.getElementById('btnBarracks');
+    const btnArcher = document.getElementById('btnArcher');
+    const btnMage = document.getElementById('btnMage');
+    const btnHero1 = document.getElementById('btnHero1');
+    const btnHero2 = document.getElementById('btnHero2');
+    const btnUlt1 = document.getElementById('btnUlt1');
+    const btnUlt2 = document.getElementById('btnUlt2');
+    const btnAlliance = document.getElementById('btnAlliance');
+    const btnNextWave = document.getElementById('btnNextWave');
+    const btnUpgrade = document.getElementById('btnUpgrade');
 
-        // -------------------- 2) ГРАНИЦЫ (ассертивные ответы) --------------------
-        const boundaryScenarios = [
-            { text: "Друг просит: «Скинь мне ответы на контрольную, иначе я провалюсь! Ты же добрый, не подведи!»", options: ["Агрессивно: 'Отвали'", "Пассивно: 'Ладно, держи'", "Уверенно: 'Я не буду давать списывать, но могу помочь объяснить тему'"], correct: 2, tip: "Ассертивный ответ сохраняет дружбу и не нарушает правила." },
-            { text: "В группе смеются над твоим стилем: «Будь как все, это же стыдно». Твоя реакция?", options: ["Сменить стиль", "Нахамить в ответ", "Спокойно: «Мне нравится так выглядеть, и я не обязан подстраиваться под чужое мнение»"], correct: 2, tip: "Защита личных предпочтений — основа психологической безопасности." },
-            { text: "Родитель настаивает показать переписку: «Если ты меня любишь, дай телефон». Твой ответ?", options: ["Отдать молча", "Крикнуть и уйти", "Сказать: «Я тебя люблю, но личная переписка — моё пространство. Давай поговорим о доверии иначе»"], correct: 2, tip: "Здоровые границы с близкими — ключ к уважению." }
-        ];
-        let currentBound = 0;
-        const boundScenario = document.getElementById('boundaryScenarioText');
-        const boundOptions = document.getElementById('boundaryOptions');
-        const boundFeedback = document.getElementById('boundaryFeedback');
-        const nextBound = document.getElementById('nextBoundaryBtn');
-        function renderBound() {
-            const b = boundaryScenarios[currentBound];
-            boundScenario.innerText = b.text;
-            boundOptions.innerHTML = '';
-            boundFeedback.style.display = 'none';
-            b.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerHTML = `<i class="fas fa-comment"></i> ${opt}`;
-                btn.addEventListener('click', () => checkBound(idx));
-                boundOptions.appendChild(btn);
-            });
-        }
-        function checkBound(selected) {
-            const b = boundaryScenarios[currentBound];
-            const isCor = selected === b.correct;
-            boundFeedback.style.display = 'block';
-            if(isCor) boundFeedback.innerHTML = `<i class="fas fa-shield-alt"></i> <strong>Отлично!</strong> ${b.tip}`;
-            else boundFeedback.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Лучше: «${b.options[b.correct]}»<br>${b.tip}`;
-        }
-        nextBound.addEventListener('click', () => { currentBound = (currentBound+1)%boundaryScenarios.length; renderBound(); });
-        renderBound();
+    // ---------- Константы ----------
+    const COLS = 12, ROWS = 8, CELL = 60;
+    canvas.width = COLS * CELL; canvas.height = ROWS * CELL;
 
-        // -------------------- 3) ДЫХАНИЕ (исправленное, без глюков) --------------------
-        let breathInterval = null;
-        let breathActive = false;
-        const breathCircle = document.getElementById('breathingCircle');
-        const breathPhaseSpan = document.getElementById('breathPhase');
-        const breathInstruction = document.getElementById('breathInstruction');
-        function stopBreath() {
-            if(breathInterval) { clearInterval(breathInterval); breathInterval = null; }
-            breathActive = false;
-            breathCircle.style.transform = 'scale(1)';
-            breathPhaseSpan.innerText = 'Вдох';
-            breathInstruction.innerText = 'Дыхание остановлено. Нажмите "Старт"';
+    // Карта
+    const PATH = [
+        [0,0],[0,1],[0,2],[0,3],
+        [1,3],
+        [2,3],[2,4],[2,5],[2,6],[2,7],[2,8],
+        [1,8],
+        [0,8],[0,9],[0,10],[0,11],
+        [1,11],[2,11],[3,11],
+        [4,11],[4,10],[4,9],[4,8],
+        [5,8],[5,7],[5,6],[5,5],[5,4],[5,3],
+        [6,3],
+        [7,3],[7,4],[7,5],[7,6],[7,7],[7,8],[7,9],[7,10],[7,11]
+    ];
+    const PATH_SET = new Set(PATH.map(([r,c])=>`${r},${c}`));
+    const CASTLE = [7, 11];
+    const TREE_SET = new Set(['3,0','5,2','1,5','6,1','0,5','4,0','7,1','3,7']);
+
+    const DMG_PHYSICAL = 'physical';
+    const DMG_ARROW = 'arrow';
+    const DMG_MAGIC = 'magic';
+    const DMG_PURE = 'pure';
+
+    let gold = 350, castleHP = 30, currentWave = 0;
+    const TOTAL_WAVES = 100;
+    let waveActive = false, waveEnemiesLeft = 0, waveSpawnQueue = [], waveSpawnTimer = 0;
+    let gameOver = false, victory = false;
+    let treeClickCount = 0, easterEggCollected = false; // пасхалка
+    let selectedHeroIndex = null, selectedTower = null, buildAction = null;
+    let toastTimeout = null, allianceActive = false;
+    let allianceCooldown = 0;
+    let towers = [], enemies = [], projectiles = [], particles = [], floatingTexts = [], heroes = [];
+
+    // ---------- Классы ----------
+    class Enemy {
+        constructor(type, waveNum) {
+            this.type = type; this.pathIndex = 0;
+            const [r,c] = PATH[0]; this.x = c*CELL+CELL/2; this.y = r*CELL+CELL/2;
+            this.alive = true; this.reachedCastle = false; this.stunned = false; this.stunTimer = 0;
+            this.slowed = false; this.slowTimer = 0;
+            const s = Enemy.stats(type, waveNum);
+            this.maxHP = s.hp; this.hp = s.hp; this.speed = s.speed; this.reward = s.reward;
+            this.castleDamage = s.castleDamage; this.heroDamage = s.heroDamage;
+            this.size = s.size; this.color = s.color; this.glowColor = s.glowColor || null;
+            this.resistances = s.resistances || {};
         }
-        function startBreath() {
-            stopBreath();
-            breathActive = true;
-            let isInhale = true;
-            breathCircle.style.transform = 'scale(1.32)';
-            breathPhaseSpan.innerText = 'Вдох';
-            breathInstruction.innerText = 'Вдох... наполняйтесь спокойствием';
-            breathInterval = setInterval(() => {
-                if(!breathActive) return;
-                if(isInhale) {
-                    isInhale = false;
-                    breathPhaseSpan.innerText = 'Выдох';
-                    breathInstruction.innerText = 'Выдох... отпускаем напряжение';
-                    breathCircle.style.transform = 'scale(1)';
-                } else {
-                    isInhale = true;
-                    breathPhaseSpan.innerText = 'Вдох';
-                    breathInstruction.innerText = 'Вдох... спокойствие приходит';
-                    breathCircle.style.transform = 'scale(1.32)';
+        static stats(type, wave) {
+            const waveFactor = 1 + (wave - 1) * 0.22;
+            const resNone = {};
+            const resPhysHalf = {physical:0.5, arrow:1.0, magic:1.0};
+            const resArrowHalf = {physical:1.0, arrow:0.5, magic:1.0};
+            const resMagicHalf = {physical:1.0, arrow:1.0, magic:0.5};
+            const resPhysWeak = {physical:1.5, arrow:1.0, magic:1.0};
+            const resAllHalf = {physical:0.5, arrow:0.5, magic:0.5};
+            const t = {
+                peasant:      {hp:170+wave*30, speed:1.8, reward:15, castleDamage:5, heroDamage:15, size:18, color:'#c8956c', resistances:resNone},
+                runner:       {hp:90+wave*18, speed:3.6, reward:10, castleDamage:4, heroDamage:10, size:14, color:'#e8b84b', resistances:resArrowHalf},
+                tank:         {hp:450+wave*80, speed:1.1, reward:30, castleDamage:8, heroDamage:30, size:24, color:'#a0522d', resistances:resPhysHalf},
+                mage:         {hp:130+wave*22, speed:1.3, reward:22, castleDamage:9, heroDamage:45, size:16, color:'#9b59b6', resistances:resMagicHalf},
+                berserker:    {hp:350+wave*60, speed:1.7, reward:40, castleDamage:10, heroDamage:38, size:22, color:'#cc5500', resistances:resPhysHalf},
+                shaman:       {hp:220+wave*40, speed:1.2, reward:28, castleDamage:7, heroDamage:55, size:18, color:'#4b0082', resistances:resMagicHalf},
+                scout:        {hp:110+wave*14, speed:4.5, reward:14, castleDamage:4, heroDamage:8, size:12, color:'#8fbc8f', resistances:resArrowHalf},
+                abomination:  {hp:900+wave*150, speed:0.55, reward:70, castleDamage:18, heroDamage:50, size:30, color:'#556b2f', resistances:resAllHalf},
+                assassin:     {hp:80+wave*10, speed:5.0, reward:12, castleDamage:7, heroDamage:12, size:12, color:'#2f4f4f', resistances:resPhysWeak},
+                elite_boss:   {hp:3200+wave*450, speed:0.6, reward:300+wave*20, castleDamage:30, heroDamage:70, size:38, color:'#9b59b6', glowColor:'#9b59b6', resistances:resMagicHalf},
+                mega_boss:    {hp:14000+wave*1500, speed:0.4, reward:1200, castleDamage:60, heroDamage:100, size:52, color:'#ff4500', glowColor:'#ff4500', resistances:resPhysHalf},
+            };
+            const base = t[type] || t.peasant;
+            return {
+                hp: Math.round(base.hp * waveFactor),
+                speed: base.speed,
+                reward: Math.round(base.reward * (1 + wave * 0.03)),
+                castleDamage: Math.round(base.castleDamage * (1 + wave * 0.06)),
+                heroDamage: Math.round(base.heroDamage * waveFactor),
+                size: base.size,
+                color: base.color,
+                glowColor: base.glowColor || null,
+                resistances: base.resistances
+            };
+        }
+        update(dt, heroesList) {
+            if(!this.alive||this.reachedCastle) return;
+            if(this.slowed) { this.slowTimer -= dt; if(this.slowTimer <= 0) this.slowed = false; }
+            if(this.stunned) { this.stunTimer-=dt; if(this.stunTimer<=0) this.stunned=false; return; }
+            for(const h of heroesList) {
+                if(!h.alive) continue;
+                const dx=h.x-this.x, dy=h.y-this.y;
+                if(Math.sqrt(dx*dx+dy*dy) < 0.5*CELL) { h.takeDamage(this.heroDamage*dt); return; }
+            }
+            if(this.pathIndex >= PATH.length-1) {
+                this.reachedCastle=true; this.alive=false;
+                castleHP = Math.max(0, castleHP - this.castleDamage);
+                spawnFloatingText(this.x,this.y,`-${this.castleDamage} HP`,'#ff4444');
+                if(castleHP<=0) triggerGameOver(); return;
+            }
+            const [tr,tc] = PATH[this.pathIndex+1];
+            const tx=tc*CELL+CELL/2, ty=tr*CELL+CELL/2;
+            const dx=tx-this.x, dy=ty-this.y, dist=Math.sqrt(dx*dx+dy*dy);
+            let effectiveSpeed = this.speed;
+            if(this.slowed) effectiveSpeed *= 0.4;
+            const move = effectiveSpeed * CELL * dt;
+            if(dist<=move){ this.x=tx; this.y=ty; this.pathIndex++; }
+            else{ this.x+=(dx/dist)*move; this.y+=(dy/dist)*move; }
+        }
+        takeDamage(dmg, dmgType, slowDuration = 0) {
+            if(!this.alive) return;
+            let finalDmg = dmg;
+            if(dmgType && dmgType !== DMG_PURE && this.resistances[dmgType]) {
+                finalDmg = Math.round(dmg * this.resistances[dmgType]);
+            }
+            this.hp -= finalDmg;
+            spawnFloatingText(this.x, this.y-10, `-${finalDmg}`, '#ffff00');
+            if(slowDuration > 0) { this.slowed = true; this.slowTimer = Math.max(this.slowTimer, slowDuration); }
+            if(this.hp <= 0) {
+                this.hp = 0; this.alive = false; gold += this.reward;
+                spawnParticles(this.x, this.y, this.color, 12);
+                spawnFloatingText(this.x, this.y-20, `+${this.reward}💰`, '#f0c040');
+            }
+        }
+    }
+
+    class Tower {
+        constructor(row,col,type) {
+            this.row=row; this.col=col; this.x=col*CELL+CELL/2; this.y=row*CELL+CELL/2;
+            this.type=type; this.level=1; this.attackCooldown=0; this.target=null;
+        }
+        get damageType() { return this.type==='barracks'?DMG_PHYSICAL:this.type==='archer'?DMG_ARROW:DMG_MAGIC; }
+        baseStats() {
+            const b = { barracks:{range:1.6,dmg:18,spd:0.75,cost:50,upBase:35}, archer:{range:4.0,dmg:12,spd:0.45,cost:60,upBase:40}, mage:{range:3.2,dmg:30,spd:1.1,cost:75,upBase:50} };
+            return b[this.type];
+        }
+        getStats() {
+            const b=this.baseStats(); const l=this.level;
+            return { range:b.range+(l-1)*0.1, damage:Math.round(b.dmg*(1+(l-1)*0.35)), attackSpeed:b.spd/(1+(l-1)*0.2), color:b.color };
+        }
+        getUpgradeCost() { if(this.level>=10) return Infinity; const b=this.baseStats(); return Math.round(b.upBase*(1+(this.level-1)*0.8)); }
+        update(dt, enemyList) {
+            const s=this.getStats(); this.attackCooldown-=dt; this.target=null;
+            let bestIdx=-1,bestDist=Infinity; const rangePx=s.range*CELL;
+            for(const e of enemyList) {
+                if(!e.alive) continue;
+                const dx=e.x-this.x, dy=e.y-this.y, d=Math.sqrt(dx*dx+dy*dy);
+                if(d<=rangePx && (e.pathIndex>bestIdx||(e.pathIndex===bestIdx&&d<bestDist))) {
+                    bestIdx=e.pathIndex; bestDist=d; this.target=e;
                 }
-            }, 4000);
+            }
+            if(this.target && this.attackCooldown<=0) {
+                this.attackCooldown = s.attackSpeed;
+                this.shoot(this.target, s.damage, s.color);
+            }
         }
-        document.getElementById('startBreathBtn').addEventListener('click', startBreath);
-        document.getElementById('stopBreathBtn').addEventListener('click', stopBreath);
-        // инициализация
-        breathCircle.style.transform = 'scale(1)';
-        breathCircle.style.transition = 'transform 2.2s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+        shoot(target, dmg, color) {
+            const proj = new Projectile(this.x, this.y, target, dmg, color, 550, this.damageType);
+            if(this.type === 'barracks') proj.slowDuration = 0.5;
+            else if(this.type === 'mage') proj.splashRadius = CELL * 1.0;
+            projectiles.push(proj);
+            if(this.type === 'archer' && Math.random() < 0.25) {
+                projectiles.push(new Projectile(this.x, this.y, target, dmg, color, 550, this.damageType));
+            }
+        }
+    }
 
-        // -------------------- 4) СЕТЬ ПОДДЕРЖКИ (полностью рабочая) --------------------
-        let supporters = [];
-        const supportList = document.getElementById('supportList');
-        const supportName = document.getElementById('supportName');
-        const supportRole = document.getElementById('supportRole');
-        const addBtn = document.getElementById('addSupportBtn');
-        function renderSupport() {
-            supportList.innerHTML = '';
-            if(supporters.length === 0) {
-                supportList.innerHTML = '<li style="color:#6f8f9a;"><i class="fas fa-info-circle"></i> Добавьте важных людей (родители, друзья, психолог)</li>';
+    class Projectile {
+        constructor(x,y,target,dmg,color,speed,dmgType) {
+            this.x=x; this.y=y; this.target=target; this.dmg=dmg; this.color=color; this.speed=speed;
+            this.alive=true; this.dmgType=dmgType||DMG_PHYSICAL; this.slowDuration=0; this.splashRadius=0;
+        }
+        update(dt, enemyList = enemies) {
+            if(!this.alive||!this.target||!this.target.alive) { this.alive=false; return; }
+            const dx=this.target.x-this.x, dy=this.target.y-this.y, dist=Math.sqrt(dx*dx+dy*dy), move=this.speed*dt;
+            if(dist <= move+4) {
+                this.target.takeDamage(this.dmg, this.dmgType, this.slowDuration);
+                if(this.splashRadius > 0) {
+                    for(const e of enemyList) {
+                        if(e===this.target||!e.alive) continue;
+                        const edx=e.x-this.target.x, edy=e.y-this.target.y;
+                        if(Math.sqrt(edx*edx+edy*edy) <= this.splashRadius) e.takeDamage(Math.round(this.dmg*0.6), this.dmgType);
+                    }
+                    spawnParticles(this.target.x, this.target.y, '#9b59b6', 8);
+                }
+                this.alive = false;
+            } else { this.x+=(dx/dist)*move; this.y+=(dy/dist)*move; }
+        }
+    }
+
+    class Hero {
+        constructor(name, x, y, respawnX, respawnY, color, range, dmg, spd, maxHP, speed, damageType, ultName, ultCD, ultRange, ultDmg, ultStun, ultDmgType) {
+            this.name = name; this.x = x; this.y = y; this.targetX = x; this.targetY = y;
+            this.color = color; this.range = range; this.baseDmg = dmg; this.dmg = dmg;
+            this.baseSpd = spd; this.spd = spd; this.maxHP = maxHP; this.hp = maxHP;
+            this.speed = speed; this.damageType = damageType;
+            this.attackCooldown = 0; this.target = null;
+            this.ultName = ultName; this.ultCD = ultCD; this.ultTimer = 0;
+            this.ultRange = ultRange; this.ultDmg = ultDmg; this.ultStun = ultStun;
+            this.ultDmgType = ultDmgType;
+            this.size = 22; this.alive = true; this.deathTimer = 0;
+            this.respawnPos = { x: respawnX, y: respawnY };
+        }
+        update(dt, enemyList) {
+            if(!this.alive) { this.deathTimer-=dt; if(this.deathTimer<=0) this.respawn(); return; }
+            if(this.ultTimer>0) this.ultTimer-=dt; this.attackCooldown-=dt;
+            this.target=null; let bestIdx=-1,bestDist=Infinity; const rangePx=this.range*CELL;
+            for(const e of enemyList) {
+                if(!e.alive) continue;
+                const dx=e.x-this.x, dy=e.y-this.y, d=Math.sqrt(dx*dx+dy*dy);
+                if(d<=rangePx && (e.pathIndex>bestIdx||(e.pathIndex===bestIdx&&d<bestDist))) {
+                    bestIdx=e.pathIndex; bestDist=d; this.target=e;
+                }
+            }
+            if(this.target && this.attackCooldown<=0) {
+                this.attackCooldown=this.spd;
+                projectiles.push(new Projectile(this.x,this.y,this.target,this.dmg,this.color,650,this.damageType));
+            } else if(!this.target) {
+                const dx=this.targetX-this.x, dy=this.targetY-this.y, dist=Math.sqrt(dx*dx+dy*dy);
+                if(dist>2) { const move=this.speed*CELL*dt; if(dist<=move){ this.x=this.targetX; this.y=this.targetY; } else{ this.x+=(dx/dist)*move; this.y+=(dy/dist)*move; } }
+            }
+        }
+        takeDamage(dmg){ if(!this.alive) return; this.hp-=dmg; if(this.hp<=0){ this.hp=0; this.alive=false; this.deathTimer=15; } }
+        respawn(){ this.alive=true; this.hp=this.maxHP; this.x=this.respawnPos.x; this.y=this.respawnPos.y; this.targetX=this.x; this.targetY=this.y; }
+        useUlt(enemyList){
+            if(this.ultTimer>0||!this.alive) return false;
+            this.ultTimer=this.ultCD; const rangePx=this.ultRange*CELL;
+            for(const e of enemyList){
+                if(!e.alive) continue;
+                const dx=e.x-this.x, dy=e.y-this.y;
+                if(Math.sqrt(dx*dx+dy*dy)<=rangePx){
+                    if(this.ultDmg>0) e.takeDamage(this.ultDmg, this.ultDmgType);
+                    if(this.ultStun>0){ e.stunned=true; e.stunTimer=this.ultStun; }
+                }
+            }
+            spawnParticles(this.x,this.y,'#ffffff',20); return true;
+        }
+        getUltPercent(){ return this.ultTimer>0?this.ultTimer/this.ultCD:0; }
+    }
+
+    class Particle {
+        constructor(x,y,color,life){ this.x=x;this.y=y;this.color=color;this.life=life;this.maxLife=life; const a=Math.random()*Math.PI*2,s=40+Math.random()*100; this.vx=Math.cos(a)*s; this.vy=Math.sin(a)*s; this.size=2+Math.random()*5; }
+        update(dt){ this.life-=dt; this.x+=this.vx*dt; this.y+=this.vy*dt; this.size*=0.98; }
+        get alpha(){ return Math.max(0,this.life/this.maxLife); }
+        get alive(){ return this.life>0; }
+    }
+    class FloatText {
+        constructor(x,y,text,color,life=1.2){ this.x=x;this.y=y;this.text=text;this.color=color;this.life=life;this.maxLife=life; }
+        update(dt){ this.life-=dt; this.y-=30*dt; }
+        get alpha(){ return Math.max(0,this.life/this.maxLife); }
+        get alive(){ return this.life>0; }
+    }
+
+    function spawnParticles(x,y,color,n){ for(let i=0;i<n;i++) particles.push(new Particle(x,y,color,0.5+Math.random()*0.5)); }
+    function spawnFloatingText(x,y,txt,clr){ floatingTexts.push(new FloatText(x,y,txt,clr)); }
+    function showToast(msg){
+        if(toastTimeout) clearTimeout(toastTimeout);
+        toast.textContent=msg; toast.classList.add('show');
+        toastTimeout=setTimeout(()=>{ toast.classList.remove('show'); toastTimeout=null; },2000);
+    }
+    function isOnPath(r,c){ return PATH_SET.has(`${r},${c}`); }
+    function isCastle(r,c){ return r===CASTLE[0]&&c===CASTLE[1]; }
+    function isTowerAt(r,c){ return towers.some(t=>t.row===r&&t.col===c); }
+    function isTree(r,c){ return TREE_SET.has(`${r},${c}`); }
+    function isHeroNear(r,c){ const cx=c*CELL+CELL/2, cy=r*CELL+CELL/2; for(const h of heroes){ if(!h.alive) continue; const dx=h.x-cx, dy=h.y-cy; if(Math.sqrt(dx*dx+dy*dy)<CELL*0.7) return true; } return false; }
+    function canBuild(r,c){ return !isOnPath(r,c)&&!isCastle(r,c)&&!isTowerAt(r,c)&&!isTree(r,c)&&!isHeroNear(r,c); }
+    function getTowerAt(r,c){ return towers.find(t=>t.row===r&&t.col===c)||null; }
+    function getHeroAtPixel(px,py){ for(let i=0;i<heroes.length;i++){ if(!heroes[i].alive) continue; const dx=heroes[i].x-px, dy=heroes[i].y-py; if(Math.sqrt(dx*dx+dy*dy)<heroes[i].size+8) return i; } return null; }
+    function triggerGameOver(){ gameOver=true; waveActive=false; showToast('💔 Замок пал!'); }
+    function triggerVictory(){ victory=true; waveActive=false; showToast('🎉 Победа! Все 100 волн позади!'); }
+
+    function generateWave(level){
+        const groups=[]; let budget = 15 + level * 2.0;
+        if(level%10===0&&level>0){
+            if(level===100){ groups.push({type:'mega_boss',count:1,interval:4.0}); budget-=120; }
+            else{ groups.push({type:'elite_boss',count:1,interval:3.0}); budget-=50; }
+        }
+        const types=['peasant','runner','tank','mage'];
+        if(level>=3) types.push('berserker','shaman','scout');
+        if(level>=10) types.push('abomination');
+        if(level>=15) types.push('assassin');
+        const costs={peasant:1,runner:1.5,tank:3,mage:2.5,berserker:4,shaman:3.5,scout:1.8,abomination:6,assassin:1.2};
+        let attempts=0;
+        while(budget>0&&attempts<200){
+            const type=types[Math.floor(Math.random()*types.length)];
+            const cost=costs[type];
+            if(cost>budget){ attempts++; continue; }
+            const count = Math.min(Math.floor(budget/cost), 6);
+            groups.push({type,count,interval:0.6+Math.random()*0.8});
+            budget-=cost*count; attempts=0;
+        }
+        return groups;
+    }
+    function startWave(num){
+        if(gameOver||victory||waveActive||num>TOTAL_WAVES) return;
+        currentWave=num; waveActive=true; waveSpawnQueue=[]; waveSpawnTimer=0;
+        const groups=generateWave(num); let total=0,time=0;
+        for(const g of groups){ for(let i=0;i<g.count;i++){ waveSpawnQueue.push({type:g.type,delay:time}); time+=g.interval; total++; } }
+        waveEnemiesLeft=total; showToast(`🌊 Волна ${num} началась! Врагов: ${total}`); updateUI();
+    }
+    function spawnEnemy(type){ enemies.push(new Enemy(type,currentWave)); waveEnemiesLeft--; }
+
+    function createHeroes(){
+        heroes = [ 
+            new Hero('Сэр Альдрик', 2*CELL+CELL/2, 3*CELL+CELL/2, 1.5*CELL, 2.5*CELL, '#5dade2', 1.6, 25, 0.85, 300, 2.5, DMG_PHYSICAL, 'Щитовой шок', 15, 2.2, 0, 2.2, DMG_PHYSICAL),
+            new Hero('Моргана',   5*CELL+CELL/2, 6*CELL+CELL/2, 3.5*CELL, 5.5*CELL, '#c0392b', 3.2, 38, 1.3, 180, 2.2, DMG_MAGIC,   'Шторм теней', 12, 3.0, 80, 0, DMG_MAGIC)
+        ];
+        selectedHeroIndex = null;
+    }
+    function resetGame(){
+        gold=350; castleHP=30; currentWave=0; waveActive=false; waveEnemiesLeft=0;
+        waveSpawnQueue=[]; waveSpawnTimer=0; gameOver=false; victory=false;
+        treeClickCount=0; easterEggCollected=false;
+        selectedHeroIndex=null; selectedTower=null; buildAction=null; allianceActive=false;
+        allianceCooldown = 0;
+        towers=[]; enemies=[]; projectiles=[]; particles=[]; floatingTexts=[];
+        createHeroes(); clearSelections(); updateUI();
+    }
+    function clearSelections(){
+        btnBarracks.classList.remove('selected'); btnArcher.classList.remove('selected');
+        btnMage.classList.remove('selected'); btnHero1.classList.remove('selected');
+        btnHero2.classList.remove('selected'); btnUpgrade.classList.remove('selected');
+        buildAction=null; selectedTower=null; selectedHeroIndex=null;
+    }
+    function updateUI(){
+        goldDisplay.textContent=gold; hpDisplay.textContent=castleHP; waveDisplay.textContent=`${currentWave}/${TOTAL_WAVES}`;
+        btnBarracks.disabled=(gameOver||victory||gold<50); btnArcher.disabled=(gameOver||victory||gold<60);
+        btnMage.disabled=(gameOver||victory||gold<75); btnNextWave.disabled=(gameOver||victory||waveActive||currentWave>=TOTAL_WAVES);
+        btnNextWave.textContent=waveActive?'⏳ Идёт волна...':(currentWave>=TOTAL_WAVES?'🏆 Победа!':'▶ Следующая волна');
+        if(selectedTower){ const cost=selectedTower.getUpgradeCost(); btnUpgrade.disabled=selectedTower.level>=10||gold<cost; btnUpgrade.textContent=`⬆ Ур.${selectedTower.level} (${cost===Infinity?'Макс':cost+'💰'})`; }
+        else{ btnUpgrade.disabled=true; btnUpgrade.textContent='⬆ Улучшить'; }
+        btnHero1.classList.toggle('selected',selectedHeroIndex===0); btnHero2.classList.toggle('selected',selectedHeroIndex===1);
+        if(heroes.length>=2){ const cd1=heroes[0].getUltPercent(),cd2=heroes[1].getUltPercent(); btnUlt1.disabled=cd1>0||!heroes[0].alive||gameOver||victory; btnUlt2.disabled=cd2>0||!heroes[1].alive||gameOver||victory; btnUlt1.textContent=cd1>0?`💥 Щит.шок [${Math.ceil(heroes[0].ultTimer)}с]`:'💥 Щитовой шок'; btnUlt2.textContent=cd2>0?`🌑 Шторм [${Math.ceil(heroes[1].ultTimer)}с]`:'🌑 Шторм теней'; 
+        btnAlliance.disabled = allianceCooldown > 0 || !allianceActive || gameOver||victory;
+        btnAlliance.textContent = allianceCooldown > 0 ? `🤝 Альянс [${Math.ceil(allianceCooldown)}с]` : '🤝 Альянс';
+        }
+    }
+
+    btnBarracks.onclick=()=>{ if(gameOver||victory||gold<50){ showToast('❌ Недостаточно золота'); return; } clearSelections(); buildAction='barracks'; btnBarracks.classList.add('selected'); updateUI(); };
+    btnArcher.onclick=()=>{ if(gameOver||victory||gold<60){ showToast('❌ Недостаточно золота'); return; } clearSelections(); buildAction='archer'; btnArcher.classList.add('selected'); updateUI(); };
+    btnMage.onclick=()=>{ if(gameOver||victory||gold<75){ showToast('❌ Недостаточно золота'); return; } clearSelections(); buildAction='mage'; btnMage.classList.add('selected'); updateUI(); };
+    btnHero1.onclick=()=>{ if(gameOver||victory||!heroes[0].alive) return; clearSelections(); selectedHeroIndex=0; btnHero1.classList.add('selected'); updateUI(); showToast('🛡️ Альдрик выбран'); };
+    btnHero2.onclick=()=>{ if(gameOver||victory||!heroes[1].alive) return; clearSelections(); selectedHeroIndex=1; btnHero2.classList.add('selected'); updateUI(); showToast('🧙 Моргана выбрана'); };
+    btnUlt1.onclick=()=>{ if(heroes[0].useUlt(enemies)){ showToast('💥 Щитовой шок!'); updateUI(); } else showToast('⏳ Ульта не готова'); };
+    btnUlt2.onclick=()=>{ if(heroes[1].useUlt(enemies)){ showToast('🌑 Шторм теней!'); updateUI(); } else showToast('⏳ Ульта не готова'); };
+    btnAlliance.onclick=()=>{
+        if(allianceCooldown > 0 || !allianceActive){ showToast(allianceCooldown>0 ? `⏳ Альянс перезаряжается: ${Math.ceil(allianceCooldown)}с` : '🤝 Герои должны быть рядом!'); return; }
+        for(const e of enemies){ if(e.alive){ e.takeDamage(50,DMG_PURE); e.stunned=true; e.stunTimer=1.5; } }
+        spawnParticles(canvas.width/2,canvas.height/2,'#ffaa00',40);
+        allianceCooldown = 60;
+        showToast('✨ АЛЬЯНС: Совместный удар!');
+        updateUI();
+    };
+    btnNextWave.onclick=()=>{ if(gameOver||victory||waveActive||currentWave>=TOTAL_WAVES) return; startWave(currentWave+1); };
+    btnUpgrade.onclick=()=>{ if(!selectedTower||selectedTower.level>=10) return; const cost=selectedTower.getUpgradeCost(); if(gold<cost){ showToast('❌ Недостаточно золота'); return; } gold-=cost; selectedTower.level++; spawnParticles(selectedTower.x,selectedTower.y,'#ffdd57',15); showToast(`⬆ Башня улучшена до уровня ${selectedTower.level}!`); updateUI(); };
+
+    canvas.addEventListener('click',(e)=>{
+        if(gameOver||victory) return;
+        const rect=canvas.getBoundingClientRect(); const scaleX=canvas.width/rect.width, scaleY=canvas.height/rect.height;
+        const mx=(e.clientX-rect.left)*scaleX, my=(e.clientY-rect.top)*scaleY;
+        const col=Math.floor(mx/CELL), row=Math.floor(my/CELL);
+        // Пасхалка (одноразовая)
+        if(isTree(row,col)){
+            if(easterEggCollected) {
+                showToast('🎄 Пасхалка уже разграблена');
                 return;
             }
-            supporters.forEach((p, idx) => {
-                const li = document.createElement('li');
-                li.innerHTML = `<div><strong>${escapeHtml(p.name)}</strong> <span class="support-badge">${p.role}</span></div>
-                                <button class="delSupp" data-idx="${idx}"><i class="fas fa-trash-alt"></i></button>`;
-                supportList.appendChild(li);
-            });
-            document.querySelectorAll('.delSupp').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const i = parseInt(btn.dataset.idx);
-                    if(!isNaN(i)) { supporters.splice(i,1); renderSupport(); }
-                });
-            });
+            treeClickCount++;
+            if(treeClickCount === 10){
+                gold += 100;
+                spawnFloatingText(col*CELL+CELL/2, row*CELL+CELL/2, '+100💰 Пасхалка!', '#ff69b4');
+                showToast('🎄 Пасхалка! Вы нашли 100 золота в дупле!');
+                easterEggCollected = true;
+                treeClickCount = 0;
+            } else if(treeClickCount >= 7) {
+                showToast(`🌳 Дерево шатается (${treeClickCount}/10)`);
+            }
+            updateUI();
+            return;
         }
-        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-        addBtn.addEventListener('click', () => {
-            let name = supportName.value.trim();
-            if(name === "") { alert("Введите имя или роль человека"); return; }
-            const role = supportRole.value;
-            supporters.push({ name: name, role: role });
-            renderSupport();
-            supportName.value = "";
-        });
-        renderSupport();
+        const heroIdx=getHeroAtPixel(mx,my);
+        if(heroIdx!==null&&buildAction===null){ clearSelections(); selectedHeroIndex=heroIdx; if(heroIdx===0) btnHero1.classList.add('selected'); else btnHero2.classList.add('selected'); updateUI(); showToast(`Выбран ${heroes[heroIdx].name}`); return; }
+        const tower=getTowerAt(row,col);
+        if(tower&&buildAction===null&&heroIdx===null){ clearSelections(); selectedTower=tower; btnUpgrade.classList.add('selected'); updateUI(); showToast(`🏗️ Башня ур.${tower.level} выбрана`); return; }
+        if(buildAction){ if(!canBuild(row,col)){ showToast('❌ Нельзя строить здесь'); return; } const costs={barracks:50,archer:60,mage:75}; if(gold<costs[buildAction]){ showToast('❌ Недостаточно золота'); return; } gold-=costs[buildAction]; towers.push(new Tower(row,col,buildAction)); spawnParticles(col*CELL+CELL/2,row*CELL+CELL/2,'#ffffff',10); showToast('✅ Башня построена!'); clearSelections(); updateUI(); return; }
+        if(selectedHeroIndex!==null&&heroes[selectedHeroIndex].alive){ const tx=col*CELL+CELL/2, ty=row*CELL+CELL/2; heroes[selectedHeroIndex].targetX=tx; heroes[selectedHeroIndex].targetY=ty; showToast(`📍 ${heroes[selectedHeroIndex].name} движется к [${row},${col}]`); updateUI(); return; }
+        clearSelections(); updateUI();
+    });
+    canvas.addEventListener('contextmenu',(e)=>{ e.preventDefault(); clearSelections(); updateUI(); showToast('🚫 Отмена'); });
+    storyModal.addEventListener('click',()=>{ storyModal.style.display='none'; });
 
-        // -------------------- 5) НОВАЯ ИГРА: КиберЩит (давление в интернете) --------------------
-        const cyberScenarios = [
-            { text: "В групповом чате все требуют: «Запиши видео с танцем и выложи, иначе ты будешь изгоем! Давай, не будь скучным!»", options: ["Послушаться, чтобы не отвергли", "Игнорировать и написать: 'Я не буду это делать, мои границы важнее'", "Заплакать и выйти из чата"], correct: 1, explanation: "Уверенный отказ без оправданий — сильная позиция. Давление через 'все так делают' не должно заставлять тебя страдать." },
-            { text: "В комментариях пишут: «Ты ужасно выглядишь на этом фото, лол, удали аккаунт». Как лучше ответить?", options: ["Ответить оскорблением", "Ничего не отвечать и заблокировать / обратиться к модерации", "Начать оправдываться"], correct: 1, explanation: "Лучшая стратегия — не вступать в перепалку, блокировать и сообщать о буллинге взрослым." },
-            { text: "Друг пишет: «Если ты настоящий друг, добавь меня в родительский контроль и дай доступ к своим соцсетям, я просто проверю кое-что».", options: ["Согласиться, чтобы не потерять друга", "Сказать: 'Нет, это мои личные данные, настоящая дружба не требует жертвовать приватностью'", "Поругаться и удалить друга"], correct: 2, explanation: "Здоровая дружба уважает границы. Манипуляция 'если друг — сделай' — токсичный приём." },
-            { text: "Одноклассники создали фейковую страницу и порочат твоё имя. Какое действие будет правильным?", options: ["Молча терпеть", "Написать гневный пост и угрожать", "Сохранить скрины, сообщить учителю/родителям и в поддержку соцсети"], correct: 2, explanation: "Кибербуллинг нельзя игнорировать. Фиксация доказательств и обращение за помощью — сильный шаг." }
-        ];
-        let currentCyber = 0;
-        const cyberScenarioText = document.getElementById('cyberScenarioText');
-        const cyberOptionsDiv = document.getElementById('cyberOptionsContainer');
-        const cyberFeedbackDiv = document.getElementById('cyberFeedback');
-        const cyberCounterSpan = document.getElementById('cyberCounter');
-        const nextCyberBtn = document.getElementById('nextCyberBtn');
-        function renderCyber() {
-            const c = cyberScenarios[currentCyber];
-            cyberScenarioText.innerText = c.text;
-            cyberOptionsDiv.innerHTML = '';
-            cyberFeedbackDiv.style.display = 'none';
-            c.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerHTML = `<i class="fas fa-shield-hart"></i> ${opt}`;
-                btn.addEventListener('click', () => checkCyber(idx));
-                cyberOptionsDiv.appendChild(btn);
-            });
-            cyberCounterSpan.innerText = `${currentCyber+1}/${cyberScenarios.length}`;
-        }
-        function checkCyber(selectedIdx) {
-            const c = cyberScenarios[currentCyber];
-            const isCorrect = (selectedIdx === c.correct);
-            cyberFeedbackDiv.style.display = 'block';
-            if(isCorrect) {
-                cyberFeedbackDiv.innerHTML = `<i class="fas fa-check-double" style="color:#2e8b6c;"></i> <strong>Правильно!</strong> ${c.explanation}`;
+    let lastTime=performance.now();
+    function gameLoop(now){
+        let dt=(now-lastTime)/1000; if(dt>0.2) dt=0.2; if(dt<=0) dt=0.016; lastTime=now;
+        if(allianceCooldown > 0) allianceCooldown = Math.max(0, allianceCooldown - dt);
+        if(heroes.length>=2&&heroes[0].alive&&heroes[1].alive){ const dx=heroes[0].x-heroes[1].x, dy=heroes[0].y-heroes[1].y; allianceActive=Math.sqrt(dx*dx+dy*dy)<3*CELL; } else allianceActive=false;
+        for(const h of heroes){ if(allianceActive&&h.alive){ h.dmg=Math.round(h.baseDmg*1.4); h.spd=h.baseSpd*0.8; } else{ h.dmg=h.baseDmg; h.spd=h.baseSpd; } }
+        if(waveActive&&waveSpawnQueue.length>0){ waveSpawnTimer+=dt; while(waveSpawnQueue.length>0&&waveSpawnQueue[0].delay<=waveSpawnTimer) spawnEnemy(waveSpawnQueue.shift().type); }
+        if(waveActive&&waveSpawnQueue.length===0&&waveEnemiesLeft<=0&&enemies.filter(e=>e.alive).length===0){ waveActive=false; if(currentWave>=TOTAL_WAVES&&!gameOver) triggerVictory(); else if(!gameOver&&!victory){ showToast(`✅ Волна ${currentWave} отражена!`); gold+=20+currentWave*2; } }
+        for(const e of enemies) if(e.alive) e.update(dt,heroes);
+        enemies=enemies.filter(e=>e.alive);
+        for(const t of towers) t.update(dt,enemies);
+        for(const h of heroes) h.update(dt,enemies);
+        for(const p of projectiles) p.update(dt,enemies);
+        projectiles=projectiles.filter(p=>p.alive);
+        for(const p of particles) p.update(dt); particles=particles.filter(p=>p.alive);
+        for(const ft of floatingTexts) ft.update(dt); floatingTexts=floatingTexts.filter(ft=>ft.alive);
+        if(castleHP<=0&&!gameOver) triggerGameOver();
+        render(); updateUI(); requestAnimationFrame(gameLoop);
+    }
+
+    function render(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='#5a8a3c'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=0.5;
+        for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++) ctx.strokeRect(c*CELL,r*CELL,CELL,CELL);
+        for(const [r,c] of PATH){ ctx.fillStyle='#c8a882'; ctx.fillRect(c*CELL+2,r*CELL+2,CELL-4,CELL-4); ctx.fillStyle='#d4b896'; ctx.fillRect(c*CELL+6,r*CELL+6,CELL-12,CELL-12); }
+        const [cr,cc]=CASTLE;
+        ctx.fillStyle='#6b3a2a'; ctx.fillRect(cc*CELL+4,cr*CELL+4,CELL-8,CELL-8);
+        ctx.fillStyle='#8b5a3c'; ctx.fillRect(cc*CELL+10,cr*CELL+10,CELL-20,CELL-20);
+        ctx.fillStyle='#f0c040'; ctx.font='bold 20px "Segoe UI"'; ctx.textAlign='center';
+        ctx.fillText('🏰',cc*CELL+CELL/2,cr*CELL+CELL/2+8);
+        const [sr,sc]=PATH[0];
+        ctx.fillStyle='#3a7a3a'; ctx.fillRect(sc*CELL+8,sr*CELL+8,CELL-16,CELL-16);
+        ctx.fillStyle='#fff'; ctx.font='bold 12px "Segoe UI"'; ctx.fillText('СТАРТ',sc*CELL+CELL/2,sr*CELL+CELL/2+5);
+        for(const key of TREE_SET){ const [tr,tc]=key.split(',').map(Number); const tx=tc*CELL+CELL/2, ty=tr*CELL+CELL/2; ctx.fillStyle='#6b4226'; ctx.fillRect(tx-6,ty-4,12,16); ctx.fillStyle='#2d7d2d'; ctx.beginPath(); ctx.arc(tx,ty-6,16,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#3a9a3a'; ctx.beginPath(); ctx.arc(tx-3,ty-10,10,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#1f6f1f'; ctx.beginPath(); ctx.arc(tx+5,ty-8,11,0,Math.PI*2); ctx.fill(); }
+        for(const t of towers){
+            const tx=t.x, ty=t.y;
+            ctx.fillStyle='#555'; ctx.fillRect(tx-16,ty-4,32,20);
+            if(t.type==='barracks'){
+                ctx.fillStyle='#7f8c8d'; ctx.beginPath(); ctx.arc(tx,ty-12,10,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='#fff'; ctx.font='bold 14px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText('🛡️',tx,ty-8);
+            } else if(t.type==='archer'){
+                ctx.fillStyle='#27ae60'; ctx.beginPath(); ctx.arc(tx,ty-12,10,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='#fff'; ctx.font='bold 14px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText('🏹',tx,ty-8);
             } else {
-                cyberFeedbackDiv.innerHTML = `<i class="fas fa-times-circle" style="color:#c95a4a;"></i> <strong>Не совсем.</strong> Правильный вариант: "${c.options[c.correct]}".<br>${c.explanation}`;
+                ctx.fillStyle='#8e44ad'; ctx.beginPath(); ctx.arc(tx,ty-12,10,0,Math.PI*2); ctx.fill();
+                ctx.fillStyle='#fff'; ctx.font='bold 14px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText('🔮',tx,ty-8);
+            }
+            ctx.fillStyle='#000'; ctx.font='bold 10px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText(t.level,tx,ty-25);
+            if(t===selectedTower){
+                const s=t.getStats();
+                ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.lineWidth=2; ctx.setLineDash([5,4]);
+                ctx.beginPath(); ctx.arc(tx,ty,s.range*CELL,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
             }
         }
-        nextCyberBtn.addEventListener('click', () => {
-            currentCyber = (currentCyber + 1) % cyberScenarios.length;
-            renderCyber();
-        });
-        renderCyber();
-    });
+        for(const e of enemies){ if(!e.alive) continue; const ex=e.x, ey=e.y; ctx.save(); if(e.glowColor){ ctx.shadowColor=e.glowColor; ctx.shadowBlur=15+Math.sin(Date.now()*0.01)*5; } ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.beginPath(); ctx.ellipse(ex,ey+e.size*0.6,e.size*0.7,e.size*0.3,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle=e.stunned?'#ffeb3b':e.color; ctx.beginPath(); ctx.arc(ex,ey,e.size,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(0,0,0,0.6)'; ctx.lineWidth=2; ctx.stroke(); ctx.restore(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(ex-e.size*0.3,ey-e.size*0.2,e.size*0.25,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(ex+e.size*0.3,ey-e.size*0.2,e.size*0.25,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#000'; ctx.beginPath(); ctx.arc(ex-e.size*0.25,ey-e.size*0.2,e.size*0.12,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(ex+e.size*0.35,ey-e.size*0.2,e.size*0.12,0,Math.PI*2); ctx.fill(); const bw=e.size*1.8, bh=4, by=ey-e.size-10; ctx.fillStyle='#333'; ctx.fillRect(ex-bw/2,by,bw,bh); const ratio=e.hp/e.maxHP; ctx.fillStyle=ratio>0.5?'#2ecc71':ratio>0.25?'#f39c12':'#e74c3c'; ctx.fillRect(ex-bw/2,by,bw*ratio,bh); if(e.stunned||e.slowed){ ctx.fillStyle=e.stunned?'#ffeb3b':'#3498db'; ctx.beginPath(); ctx.arc(ex,ey-e.size-6,7,0,Math.PI*2); ctx.fill(); } }
+        for(let i=0;i<heroes.length;i++){ const h=heroes[i]; if(!h.alive){ ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.font='bold 14px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText(`⏳ ${Math.ceil(h.deathTimer)}с`,h.respawnPos.x,h.respawnPos.y-20); continue; } const hx=h.x, hy=h.y; if(selectedHeroIndex===i){ ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.arc(hx,hy,h.size+8,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]); } ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.beginPath(); ctx.ellipse(hx,hy+h.size*0.5,h.size*0.7,h.size*0.25,0,0,Math.PI*2); ctx.fill(); const grad=ctx.createRadialGradient(hx-3,hy-3,1,hx,hy,h.size); grad.addColorStop(0,'#fff'); grad.addColorStop(0.6,h.color); grad.addColorStop(1,'#000'); ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(hx,hy,h.size,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2.5; ctx.stroke(); ctx.fillStyle='#fff'; ctx.font='bold 16px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText(i===0?'🛡️':'🧙',hx,hy+6); const hbw=30, hbh=4, hby=hy-h.size-10; ctx.fillStyle='#333'; ctx.fillRect(hx-hbw/2,hby,hbw,hbh); ctx.fillStyle='#3498db'; ctx.fillRect(hx-hbw/2,hby,hbw*(h.hp/h.maxHP),hbh); }
+        if(allianceActive&&heroes[0].alive&&heroes[1].alive){ ctx.strokeStyle='rgba(255,200,0,0.5)'; ctx.lineWidth=2; ctx.setLineDash([8,6]); ctx.beginPath(); ctx.moveTo(heroes[0].x,heroes[0].y); ctx.lineTo(heroes[1].x,heroes[1].y); ctx.stroke(); ctx.setLineDash([]); }
+        for(const p of projectiles){ ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2); ctx.fill(); }
+        for(const p of particles){ ctx.fillStyle=p.color; ctx.globalAlpha=p.alpha; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); } ctx.globalAlpha=1;
+        for(const ft of floatingTexts){ ctx.fillStyle=ft.color; ctx.globalAlpha=ft.alpha; ctx.font='bold 12px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText(ft.text,ft.x,ft.y); } ctx.globalAlpha=1;
+        if(gameOver){ ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#e74c3c'; ctx.font='bold 44px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText('💔 ПОРАЖЕНИЕ',canvas.width/2,canvas.height/2); }
+        if(victory){ ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#f0c040'; ctx.font='bold 44px "Segoe UI"'; ctx.textAlign='center'; ctx.fillText('🎉 ПОБЕДА!',canvas.width/2,canvas.height/2); }
+    }
+
+    resetGame(); updateUI(); lastTime=performance.now(); requestAnimationFrame(gameLoop); storyModal.style.display='flex';
+})();
 </script>
 </body>
 </html>
